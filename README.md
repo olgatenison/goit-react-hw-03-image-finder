@@ -30,6 +30,3 @@ This application features the following functionality and components:
    npm install
    ```
 
-   <p align="center">
-     <img src="assets/prew.jpg" width="600" alt="Project Preview">
-   </p>
