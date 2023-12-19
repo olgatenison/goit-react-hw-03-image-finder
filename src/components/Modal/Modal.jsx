@@ -17,8 +17,9 @@ class Modal extends Component {
     }
   };
 
-  handleImageClick = () => {
+  handleImageClick = e => {
     // Действия при клике на изображение в модальном окне
+    e.stopPropagation();
   };
 
   render() {

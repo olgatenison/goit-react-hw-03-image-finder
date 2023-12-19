@@ -15,8 +15,13 @@ class SearchBar extends Component {
   handleSubmit = e => {
     e.preventDefault();
     const searchQuery = this.state.inputValue.trim();
-    this.props.onSubmit(searchQuery);
-    this.setState({ inputValue: '' });
+
+    // Порівнюємо searchQuery з попереднім searchName
+    if (searchQuery !== this.state.searchName) {
+      // Виконуємо оновлення стану лише у випадку, якщо новий запит не рівний попередньому
+      this.props.onSubmit(searchQuery);
+      this.setState({ searchName: searchQuery, inputValue: '' });
+    }
   };
 
   render() {

@@ -11,14 +11,13 @@ const KEY = '40311007-381e26539f6c0a156243500cd';
 const perPage = 12;
 
 class App extends Component {
-  // РІРёС…С–РґРЅРµ РїРѕР»РѕР¶РµРЅРЅСЏ
   state = {
-    search: '', // РїРѕС€СѓРє
-    images: [], // РєР°СЂС‚РёРЅРєРё С‰Рѕ РїСЂРёР№С€Р»Рё
-    currentPage: 1, // РїРѕС‚РѕС‡РЅРёР№ РЅРѕРјРµСЂ СЃС‚РѕСЂС–РЅРєРё
-    error: null, // РїРѕРІС–РґРѕРјР»РµРЅРЅСЏ РїСЂРѕ РїРѕРјРёР»РєСѓ
-    loading: false, // РїСЂР°РїРѕСЂРµС†СЊ Р·Р°РІР°РЅС‚Р°Р¶РµРЅРЅСЏ
-    totalPages: 0, // Р·Р°РіР°Р»СЊРЅР° РєС–Р»СЊРєС–СЃС‚СЊ СЃС‚РѕСЂС–РЅРѕРє
+    search: '',
+    images: [],
+    currentPage: 1,
+    error: null,
+    loading: false,
+    totalPages: 0,
   };
 
   componentDidUpdate(prevProps, prevState) {
@@ -34,14 +33,13 @@ class App extends Component {
     try {
       const URL = `https://pixabay.com/api/?q=${this.state.search}&page=${this.state.currentPage}&key=${KEY}&image_type=photo&orientation=horizontal&per_page=${perPage}`;
 
-      this.setState({ loading: true }); // РІРјРёРєР°С”РјРѕ Р»РѕСѓРґРµСЂ
+      this.setState({ loading: true });
 
-      const response = await axios.get(URL); // СЂРѕР±РёРјРѕ Р·Р°РїРёС‚
+      const response = await axios.get(URL);
       const data = response.data;
       const newImages = data.hits;
 
       if (newImages.length === 0 || !this.state.search) {
-        // СЏРєС‰Рѕ РЅРµРјР°С” РєР°СЂС‚РёРЅРєРё С‚Рѕ РІРёРІРѕРґРёРјРѕ РїРѕРјРёР»РєСѓ
         return toast.info('Sorry image not found...', {
           position: toast.POSITION.TOP_RIGHT,
         });
@@ -51,12 +49,12 @@ class App extends Component {
         images: [...prevState.images, ...newImages],
         totalPages: Math.ceil(data.totalHits / 12),
         error: '',
-        loading: false, // Р·РЅС–РјР°С”РјРѕ Р»РѕСѓРґРµСЂ
+        loading: false,
       }));
     } catch (error) {
       console.error('Error fetching data:', error);
     } finally {
-      this.setState({ loading: false }); // РІ Р±СѓРґСЊ-СЏРєРѕРјСѓ РІРёРјРєРЅСѓС‚Рё Р»РѕСѓРґРµСЂ
+      this.setState({ loading: false });
     }
   };
 
